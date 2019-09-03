@@ -222,7 +222,7 @@ module Stripe
       # If being called from `StripeClient#request`, put the last response in
       # thread-local memory so that it can be returned to the user. Don't store
       # anything otherwise so that we don't leak memory.
-      if self.class.current_thread_context.last_responses&.key?(object_id)
+      if self.class.current_thread_context.last_responses && self.class.current_thread_context.last_responses.key?(object_id)
         self.class.current_thread_context.last_responses[object_id] = resp
       end
 
